@@ -1,6 +1,12 @@
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-    // Wrap images and players into pairs
+    // Hide empty div elements at the top
+    document.querySelectorAll('.col-12.my-2 .card').forEach(function (div) {
+        if (!div.hasChildNodes()) {
+            div.style.display = 'none';
+        }
+    });
+
     var slideshowContainer = document.createElement('div');
     slideshowContainer.id = 'slideshow-container';
 
@@ -8,14 +14,26 @@ document.addEventListener('DOMContentLoaded', function() {
     var pair;
     var images = document.querySelectorAll('.col-12.my-2 img.img-fluid.rounded');
     var players = document.querySelectorAll('.col-12.my-2 audio');
+    var paragraphs = document.querySelectorAll('.col-12.my-2 .card-body');
 
-    if (images.length === players.length) {
-        images.forEach(function(image, index) {
+    if (images.length === players.length && images.length === paragraphs.length) {
+        players.forEach(function (player, index) {
             pair = document.createElement('div');
             pair.classList.add('pair');
-            pair.style.display = index === 0 ? 'block' : 'none'; // Only show the first pair initially
-            pair.appendChild(image.parentElement);
-            pair.appendChild(players[index].parentElement);
+            pair.style.display = index === 0 ? 'block' : 'none';
+
+            // Create and append the title as a <span>
+            var title = document.createElement('span');
+            title.innerText = player.getAttribute('title'); // Using audio title
+            title.style.color = 'white';
+            title.style.fontWeight = 'bold';
+
+            // Append elements to the pair
+            pair.appendChild(images[index].parentElement);
+            pair.appendChild(player.parentElement);
+            pair.appendChild(title); // Title below audio player, above paragraph
+            pair.appendChild(paragraphs[index]);
+
             pairs.push(pair);
             slideshowContainer.appendChild(pair);
         });
@@ -34,27 +52,20 @@ document.addEventListener('DOMContentLoaded', function() {
     slideshowContainer.appendChild(prevButton);
     slideshowContainer.appendChild(nextButton);
 
-    // Download RSS button
     var downloadButton = document.createElement('button');
     downloadButton.id = 'download-button';
-
-    // Create an icon element for the Font Awesome icon
     var iconElem = document.createElement('i');
     iconElem.className = 'far fa-arrow-alt-circle-down';
-    downloadButton.appendChild(iconElem); // Add the icon to the button
-
-    // Add a space and then the RSS text
+    downloadButton.appendChild(iconElem);
     var textNode = document.createTextNode(' RSS');
     downloadButton.appendChild(textNode);
-
-    downloadButton.className = 'rss-button'; // Use the new rss-button class
+    downloadButton.className = 'rss-button';
     slideshowContainer.appendChild(downloadButton);
 
     document.getElementById('links').appendChild(slideshowContainer);
 
     downloadButton.onclick = generateRSS;
 
-    // Function to navigate slides
     function navigateSlide(direction) {
         var activeIndex = 0;
         pairs.forEach(function(pair, index) {
@@ -69,11 +80,9 @@ document.addEventListener('DOMContentLoaded', function() {
         pairs[newIndex].style.display = 'block';
     }
 
-    // RSS feed generation
     function generateRSS(event) {
         event.preventDefault();
 
-        // Assuming that the title, author, and description are constants (you can change them)
         const podcast = {
             title: "My Podcast Title",
             author: "Author Name",
@@ -82,32 +91,35 @@ document.addEventListener('DOMContentLoaded', function() {
 
         let episodes = [];
         let imagesHref = [];
+        let episodeDescriptions = [];
+        let episodeTitles = [];
 
         for (let i = 0; i < players.length; i++) {
             const audioSrc = players[i].querySelector('source').src;
             const imageSrc = images[i].src;
+            const episodeDescription = paragraphs[i].textContent.trim();
+            const episodeTitle = players[i].getAttribute('title'); // Using audio title
 
             episodes.push(audioSrc);
             imagesHref.push(imageSrc);
+            episodeDescriptions.push(episodeDescription);
+            episodeTitles.push(episodeTitle);
         }
 
-        // Generating RSS feed
         const rssHeader = `<?xml version="1.0" encoding="UTF-8"?><rss version="2.0" xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd"><channel><title>${podcast.title}</title><link>${window.location.href}</link><language>en</language><itunes:author>${podcast.author}</itunes:author><description>${podcast.description}</description>`;
         let rssItems = '';
 
         for (let i = 0; i < episodes.length; i++) {
-            // Assuming static episode details (you can customize these as needed)
-            const episodeTitle = `Episode ${i + 1}`;
-            const episodeDescription = `Description for episode ${i + 1}`;
-            const pubDate = new Date().toUTCString(); // Current date as an example
+            const episodeTitle = episodeTitles[i];
+            const episodeDescription = episodeDescriptions[i];
+            const pubDate = new Date().toUTCString();
 
-            rssItems += `<item><title>${episodeTitle}</title><description>${episodeDescription}</description><enclosure url="${episodes[i]}" length="0" type="audio/mpeg"/><itunes:image href="${imagesHref[i]}" /><pubDate>${pubDate}</pubDate></item>`;
+            rssItems += `<item><title>${episodeTitle}</title><description>${episodeDescription}</description><enclosure url="${episodes[i]}" length="0" type="audio/mpeg" /><itunes:image href="${imagesHref[i]}" /><pubDate>${pubDate}</pubDate></item>`;
         }
 
         const rssFooter = `</channel></rss>`;
         const rss = new Blob([rssHeader + rssItems + rssFooter], { type: 'application/rss+xml' });
 
-        // Creating download link
         const url = URL.createObjectURL(rss);
         var a = document.createElement("a");
         document.body.appendChild(a);
@@ -118,4 +130,5 @@ document.addEventListener('DOMContentLoaded', function() {
         window.URL.revokeObjectURL(url);
     }
 });
+
 </script>
