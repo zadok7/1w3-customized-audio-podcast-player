@@ -6,7 +6,7 @@ Just some custom code to format [1W3](https://1w3.io) audio file uploads into a 
 
 ## Step 1
 
-In 1W3 an image block, then an audio block for each episode, song, etc. Repeat.
+In 1W3 add an image block, then an audio block for each episode, or song, etc. Repeat.
 
 ![1w3-1-one-episode](https://github.com/zadok7/1w3-customized-audio-podcast-player/assets/88821511/7fa00bf1-6034-4f24-b847-1614f4396d96)
 
