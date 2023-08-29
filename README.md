@@ -1,6 +1,6 @@
-# 1w3-customized-audio-podcast-player
+# Decntralized Podcast and Audio Player on 1W3
 
-Just some custom code to format [1W3](https://1w3.io) audio file uploads into a scrollable player and podcast feed.
+Just some custom code to format [1W3](https://1w3.io) audio file uploads into a decentralized podcast audio player.
 
 # Setting up
 
@@ -18,7 +18,7 @@ Copy the contents of `custom.js` and `custom.css` into the Advanced customizatio
 
 # Result
 
-Now any image thet is proceeded by an audio file will be reformated into a player that can be controlled by left and right navigation. It will also automatically generate a podcast.rss file so it can be used to subscribe on players like Apple Podcast.
+Now any image that is proceeded by an audio file will be reformated into a player that can be controlled by left and right navigation. It will also automatically generate a podcast.rss file so it can be used to subscribe on players like Apple Podcast.
 
 ![1w3-1-reformatted](https://github.com/zadok7/1w3-customized-audio-podcast-player/assets/88821511/1e8b3e64-fb6f-49c3-9605-59ada9a85647)
 
