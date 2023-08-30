@@ -57,11 +57,23 @@ Copy the contents of `custom.js` and `custom.css` into the Advanced customizatio
 
 ![1w3-1-customize](https://github.com/zadok7/1w3-customized-audio-podcast-player/assets/88821511/5d92a6bc-f256-45be-830a-5da9c5c37432)
 
-# Result
+### Result
 
 Now any image that is proceeded by an audio file and paragraph will be reformated into a player that can be controlled by left and right navigation. It will also automatically generate a podcast.rss file so it can be used to subscribe on players like Apple Podcast.
 
 ![image](https://github.com/zadok7/decentralized-podcast-ipfs-1w3/assets/88821511/115b9744-3130-4a18-95dc-e2b6b08aaf39)
 
+## Final steps
+
+Publish the site to IPFS.
+
+![image](https://github.com/zadok7/decentralized-podcast-ipfs-1w3/assets/88821511/fbd36113-03d4-4520-8d1b-eb7187060598)
+
+Connect your ENS name. If you use IPNS you'll avoid paying gas for each update.
+
+![image](https://github.com/zadok7/decentralized-podcast-ipfs-1w3/assets/88821511/43fa3d63-e5a5-4c6f-8928-39f2f6e445b3)
+
 > **Note:** This is just a proof of concept. The RSS feed does not read publishing dates, org the main podcast image. It does grab the image, audio file and description and puts those in the RSS subscription feed.
+
+
 
