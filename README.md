@@ -59,8 +59,9 @@ Copy the contents of `custom.js` and `custom.css` into the Advanced customizatio
 
 # Result
 
-Now any image that is proceeded by an audio file will be reformated into a player that can be controlled by left and right navigation. It will also automatically generate a podcast.rss file so it can be used to subscribe on players like Apple Podcast.
+Now any image that is proceeded by an audio file and paragraph will be reformated into a player that can be controlled by left and right navigation. It will also automatically generate a podcast.rss file so it can be used to subscribe on players like Apple Podcast.
 
 ![image](https://github.com/zadok7/decentralized-podcast-ipfs-1w3/assets/88821511/115b9744-3130-4a18-95dc-e2b6b08aaf39)
 
-**Note - This is just a proof of concept. The RSS feed does not read any publishing date, and the main podcast image. It does grab the image, audio file and description and puts those in the RSS subscription feed.
+> **Note:** This is just a proof of concept. The RSS feed does not read publishing dates, org the main podcast image. It does grab the image, audio file and description and puts those in the RSS subscription feed.
+
