@@ -71,8 +71,7 @@ Publish the site to IPFS.
 
 Connect your ENS name. If you use IPNS you'll avoid paying gas for each update.
 
-![1w3-1-connect-ens2](https://github.com/zadok7/decentralized-podcast-ipfs-1w3/assets/88821511/ec15195f-2873-48d1-aa8e-98661a4565b1)
-
+![1w3-1-connect-ens3](https://github.com/zadok7/decentralized-podcast-ipfs-1w3/assets/88821511/49228acb-6edb-4d87-b3f3-a491a57029a7)
 
 > **Note:** This is just a proof of concept. The RSS feed does not read publishing dates, org the main podcast image. It does grab the image, audio file and description and puts those in the RSS subscription feed.
 
